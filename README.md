@@ -1,5 +1,5 @@
 # Диаграмма
-![](https://github.com/Pudums/proektproektirovanie/blob/main/SDDiagram.png)
+![](https://github.com/Pudums/proektproektirovanie/blob/master/SDDiagram.png)
 # Описание диаграммы
 ## Обозначения
 
