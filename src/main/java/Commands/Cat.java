@@ -34,9 +34,7 @@ public class Cat extends Command {
                 }
             } else {
                 for (String str: args) {
-                    for (char c: str.toCharArray()) {
-                        output.write(c);
-                    }
+                    readFile(str);
                 }
             }
             output.close();
