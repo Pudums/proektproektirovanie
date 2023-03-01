@@ -17,6 +17,7 @@ public class Echo extends Command {
                     for (char c: str.toCharArray()) {
                         output.write(c);
                     }
+                    output.write(' ');
                 }
             }
             output.close();
