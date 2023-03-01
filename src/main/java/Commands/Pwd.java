@@ -1,4 +1,4 @@
 package Commands;
 
-public class Pwd {
+public class Pwd extends Command {
 }
