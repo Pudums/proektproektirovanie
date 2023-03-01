@@ -7,6 +7,10 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 public class CommandRunner {
     public void runCommands(List<Command> commands) throws IOException {
+        if (commands.size() == 0){
+            return;
+        }
+        commandThreads = (ThreadPoolExecutor) Executors.newFixedThreadPool(commands.size());
         PipedInputStream output = new PipedInputStream();
         for(int i = 1; i < commands.size(); i++){
             linkCommands(commands.get(i - 1), commands.get(i));
@@ -16,10 +20,8 @@ public class CommandRunner {
             commandThreads.execute(command::processCommand);
         }
         int ch;
-        while (!commandThreads.isTerminated()) {
-            if((ch = output.read()) != -1) {
-                System.out.print((char)ch);
-            }
+        while ((ch = output.read()) != -1) {
+            System.out.print((char)ch);
         }
         commandThreads.shutdown();
     }
@@ -29,5 +31,5 @@ public class CommandRunner {
     public void processException(Exception e){
 
     }
-    private final ThreadPoolExecutor commandThreads = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
+    private ThreadPoolExecutor commandThreads;
 }
