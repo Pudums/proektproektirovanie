@@ -18,7 +18,6 @@ public class CommandParser {
         StringBuilder currentWord = new StringBuilder();
         String curCommand = "";
         ArrayList<String> curArgs = new ArrayList<>();
-        String curWord = "";
         boolean inQuotes = false;
         boolean inDoubleQuotes = false;
         while (i < input.length()) {
@@ -69,10 +68,27 @@ public class CommandParser {
                             curArgs.add(word);
                         }
                     }
+                    System.out.println(word);
                     currentWord = new StringBuilder();
+
                 }
             }
             i++;
+        }
+        String lastWord = currentWord.toString();
+        if (!lastWord.equals("")) {
+            if (curCommand.equals("")) {
+                curCommand = lastWord;
+            } else {
+                curArgs.add(lastWord);
+            }
+            Command c = commandMap.get(curCommand);
+            if (c != null) {
+                for (String s : curArgs) {
+                    c.addArgument(s);
+                }
+            }
+            result.add(c);
         }
         System.out.printf("i found results %s", result.size());
         return result;
