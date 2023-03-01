@@ -13,8 +13,9 @@ public class Command {
 
     }
     protected final List<String> args = new ArrayList<>();
-    protected PipedInputStream input;
-    protected PipedOutputStream output;
+    protected PipedInputStream input = new PipedInputStream();
+    protected PipedOutputStream output = new PipedOutputStream();
+
     public void addArgument(String arg){
         args.add(arg);
     }
