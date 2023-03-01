@@ -18,9 +18,10 @@ public class CommandRunner {
         int ch;
         while (!commandThreads.isTerminated()) {
             if((ch = output.read()) != -1) {
-                System.out.println((char)ch);
+                System.out.print((char)ch);
             }
         }
+        commandThreads.shutdown();
     }
     public void linkCommands(Command from, Command to) throws IOException {
         from.getOutput().connect(to.getInput());
