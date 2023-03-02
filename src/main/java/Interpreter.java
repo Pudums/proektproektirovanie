@@ -19,7 +19,7 @@ public class Interpreter {
         }
     }
 
-    public void parseAndRunCommands() throws IOException {
+    public void parseAndRunCommands() throws Exception {
         String inputLine = input.readLine();
         List<Command> commands = parser.parseCommands(inputLine);
         runner.runCommands(commands);

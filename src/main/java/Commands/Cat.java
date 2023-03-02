@@ -1,6 +1,8 @@
 package Commands;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -8,9 +10,11 @@ import java.util.*;
 
 public class Cat extends Command {
     private void readFile(String filename) throws IOException {
-        String text = new String(Files.readAllBytes(Paths.get("file")), StandardCharsets.UTF_8);
-        for (char c: text.toCharArray()) {
-            output.write(c);
+        try(InputStream input = new FileInputStream(Paths.get(filename).toFile())) {
+            int c;
+            while((c = input.read()) != -1){
+                output.write((char)c);
+            }
         }
     }
 
@@ -20,13 +24,13 @@ public class Cat extends Command {
             if (args.size() == 0) {
                 int b = 0;
                 ArrayList<String> filenames = new ArrayList<>();
-                String filename = "";
+                StringBuilder filename = new StringBuilder();
                 while ((b = input.read()) != -1) {
                     if (Character.isWhitespace((byte) b)) {
-                        filenames.add(filename);
-                        filename = "";
+                        filenames.add(filename.toString());
+                        filename = new StringBuilder();
                     } else {
-                        filename += (byte) b;
+                        filename.append((char) b);
                     }
                 }
                 for (String str: filenames) {
