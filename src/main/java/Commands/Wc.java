@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Wc extends Command {
     @Override
     public void processCommand() {
+        //TODO fucking rewrite this piece of shit
         try {
             if (args.size() == 0) {
                 int b = 0;
